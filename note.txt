@@ -1,0 +1,10 @@
+For clear cache,
+                >>php artisan config:clear
+                >>php artisan cache:clear
+                >>php artisan config:cache (3 times)\
+
+
+For vendor error,
+                >>Firstly vendor folder delete
+                >>composer install = vendor folder recreate
+                >>composer update = vendor folder update
