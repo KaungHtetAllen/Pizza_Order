@@ -10,7 +10,9 @@ class CategoryController extends Controller
 {
     //direct category list page
     public function list(){
-        $categories = Category::orderBy('created_at','desc')->get();
+        $categories = Category::when(request('key'), function($query){
+            $query->where('name','like','%'.request('key').'%');
+        })->orderBy('created_at','desc')->paginate(4);
         return view('admin.category.list', compact('categories'));
     }
 
@@ -19,12 +21,19 @@ class CategoryController extends Controller
         return view('admin.category.create');
     }
 
-    //direct category create
+    //create category
     public function create(Request $request){
         $this->categoryValidationCheck($request);
         $data = $this->requestCategoryData($request);
         Category::create($data);
-        return redirect()->route('category#list');
+        return redirect()->route('category#list')->with(['createSuccess'=>'Category Created ...']);
+    }
+
+    //delete category
+    public function delete($id){
+        // dd($id);
+        Category::where('category_id',$id)->delete();
+        return back()->with(['deleteSuccess'=>'Category Deleted ...']);
     }
 
     //category validation check

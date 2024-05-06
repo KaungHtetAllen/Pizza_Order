@@ -27,6 +27,54 @@
                         </button>
                     </div>
                 </div>
+                {{-- insert alert message --}}
+                @if (session('createSuccess'))
+                <div class="col-4 offset-8">
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <strong><i class="fa-solid fa-check mr-2"></i>{{ session('createSuccess')}}</strong>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                </div>
+                @endif
+
+                {{-- delete alert message --}}
+                @if (session('deleteSuccess'))
+                <div class="col-4 offset-8">
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <strong><i class="fa-solid fa-circle-xmark mr-2"></i>{{ session('deleteSuccess')}}</strong>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                </div>
+                @endif
+
+                <div class="row">
+                    <div class="col-3">
+                        <h4 class="text-secondary">Search Key : <span class="text-danger">{{ request('key')}}</span></h4>
+                    </div>
+                    <div class="col-3 offset-6">
+                        <form action="{{ route('category#list')}}" method="GET">
+                            @csrf
+                            <div class="d-flex">
+                                <input type="text" name="key" id="" class="form-control" placeholder="Search ..." value="{{ request('key')}}">
+                                <button class="btn bg-dark text-white" type="submit">
+                                    <i class="fa-solid fa-magnifying-glass"></i>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-5">
+                        <h3><i class="fa-solid fa-database mr-2" title="Total"></i>- {{ $categories->total()}}</h3>
+                    </div>
+                </div>
+
+                @if (count($categories) != 0)
                 <div class="table-responsive table-responsive-data2">
                     <table class="table table-data2 text-center">
                         <thead>
@@ -51,9 +99,11 @@
                                         <button class="item" data-toggle="tooltip" data-placement="top" title="Edit">
                                             <i class="zmdi zmdi-edit"></i>
                                         </button>
-                                        <button class="item" data-toggle="tooltip" data-placement="top" title="Delete">
-                                            <i class="zmdi zmdi-delete"></i>
-                                        </button>
+                                        <a href="{{ route('category#delete',$category->category_id)}}">
+                                            <button class="item" data-toggle="tooltip" data-placement="top" title="Delete">
+                                                <i class="zmdi zmdi-delete"></i>
+                                            </button>
+                                        </a>
                                         {{-- <button class="item" data-toggle="tooltip" data-placement="top" title="More">
                                             <i class="zmdi zmdi-more"></i>
                                         </button> --}}
@@ -64,7 +114,13 @@
                             @endforeach
                         </tbody>
                     </table>
+                    <div class="mt-1">
+                        {{ $categories->appends(request()->query())->links()}}
+                    </div>
                 </div>
+                @else
+                <h3 class=" text-secondary text-center mt-5">There is no Categories Here!</h3>
+                @endif
                 <!-- END DATA TABLE -->
             </div>
         </div>
