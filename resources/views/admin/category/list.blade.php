@@ -17,7 +17,7 @@
                         </div>
                     </div>
                     <div class="table-data__tool-right">
-                        <a href="category.html">
+                        <a href="{{ route('category#createPage')}}">
                             <button class="au-btn au-btn-icon au-btn--green au-btn--small">
                                 <i class="zmdi zmdi-plus"></i>Add Category
                             </button>
@@ -28,7 +28,7 @@
                     </div>
                 </div>
                 <div class="table-responsive table-responsive-data2">
-                    <table class="table table-data2">
+                    <table class="table table-data2 text-center">
                         <thead>
                             <tr>
                                 <th>ID</th>
@@ -38,14 +38,15 @@
                             </tr>
                         </thead>
                         <tbody>
+                            @foreach ($categories as $category)
                             <tr class="tr-shadow">
-                                <td>1</td>
-                                <td>Myanmar Pizza</td>
-                                <td>2018-09-27 02:12</td>
+                                <td>{{ $category->category_id }}</td>
+                                <td class="col-6">{{ $category->name}}</td>
+                                <td>{{ $category->created_at->format('d-M-Y')}}</td>
                                 <td>
                                     <div class="table-data-feature">
-                                        <button class="item" data-toggle="tooltip" data-placement="top" title="Send">
-                                            <i class="zmdi zmdi-mail-send"></i>
+                                        <button class="item" data-toggle="tooltip" data-placement="top" title="View">
+                                            <i class="fa-solid fa-eye"></i>
                                         </button>
                                         <button class="item" data-toggle="tooltip" data-placement="top" title="Edit">
                                             <i class="zmdi zmdi-edit"></i>
@@ -53,13 +54,14 @@
                                         <button class="item" data-toggle="tooltip" data-placement="top" title="Delete">
                                             <i class="zmdi zmdi-delete"></i>
                                         </button>
-                                        <button class="item" data-toggle="tooltip" data-placement="top" title="More">
+                                        {{-- <button class="item" data-toggle="tooltip" data-placement="top" title="More">
                                             <i class="zmdi zmdi-more"></i>
-                                        </button>
+                                        </button> --}}
                                     </div>
                                 </td>
                             </tr>
                             <tr class="spacer"></tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
