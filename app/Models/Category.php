@@ -11,7 +11,6 @@ class Category extends Model
 
     // Declaration
     protected $fillable = [
-        'category_id',
         'name',
     ];
 }

@@ -51,6 +51,18 @@
                 </div>
                 @endif
 
+                {{-- delete alert message --}}
+                @if (session('updateSuccess'))
+                <div class="col-4 offset-8">
+                    <div class="alert alert-info alert-dismissible fade show" role="alert">
+                        <strong><i class="fa-solid fa-circle-up mr-2"></i>{{ session('updateSuccess')}}</strong>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                </div>
+                @endif
+
                 <div class="row">
                     <div class="col-3">
                         <h4 class="text-secondary">Search Key : <span class="text-danger">{{ request('key')}}</span></h4>
@@ -88,18 +100,18 @@
                         <tbody>
                             @foreach ($categories as $category)
                             <tr class="tr-shadow">
-                                <td>{{ $category->category_id }}</td>
+                                <td></td>
+                                <td>{{ $category->id }}</td>
                                 <td class="col-6">{{ $category->name}}</td>
                                 <td>{{ $category->created_at->format('d-M-Y')}}</td>
                                 <td>
                                     <div class="table-data-feature">
-                                        <button class="item" data-toggle="tooltip" data-placement="top" title="View">
-                                            <i class="fa-solid fa-eye"></i>
-                                        </button>
-                                        <button class="item" data-toggle="tooltip" data-placement="top" title="Edit">
-                                            <i class="zmdi zmdi-edit"></i>
-                                        </button>
-                                        <a href="{{ route('category#delete',$category->category_id)}}">
+                                        <a href="{{ route('category#edit',$category->id)}}">
+                                            <button class="item mr-2" data-toggle="tooltip" data-placement="top" title="Edit">
+                                                <i class="zmdi zmdi-edit"></i>
+                                            </button>
+                                        </a>
+                                        <a href="{{ route('category#delete',$category->id)}}">
                                             <button class="item" data-toggle="tooltip" data-placement="top" title="Delete">
                                                 <i class="zmdi zmdi-delete"></i>
                                             </button>

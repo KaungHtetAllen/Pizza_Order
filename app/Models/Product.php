@@ -11,7 +11,6 @@ class Product extends Model
 
     // Declaration
     protected $fillable = [
-        'product_id',
         'category_id',
         'name',
         'description',

@@ -12,7 +12,6 @@ class Rating extends Model
 
     // Declaration
     protected $fillable = [
-        'rating_id',
         'user_id',
         'product_id',
         'rating_count',
