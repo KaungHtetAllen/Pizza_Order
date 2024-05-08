@@ -51,7 +51,7 @@
                 </div>
                 @endif
 
-                {{-- delete alert message --}}
+                {{-- update alert message --}}
                 @if (session('updateSuccess'))
                 <div class="col-4 offset-8">
                     <div class="alert alert-info alert-dismissible fade show" role="alert">
@@ -62,6 +62,8 @@
                       </div>
                 </div>
                 @endif
+
+                
 
                 <div class="row">
                     <div class="col-3">

@@ -135,13 +135,19 @@
                                             <div class="account-dropdown__body">
                                                 <div class="account-dropdown__item">
                                                     <a href="#">
-                                                        <i class="zmdi zmdi-account"></i>Account</a>
+                                                        <i class="fa-solid fa-user"></i>Account</a>
+                                                </div>
+                                            </div>
+                                            <div class="account-dropdown__body">
+                                                <div class="account-dropdown__item">
+                                                    <a href="{{ route('admin#changePasswordPage')}}">
+                                                        <i class="fa-solid fa-key"></i>Change Password</a>
                                                 </div>
                                             </div>
                                             <div class="account-dropdown__footer my-3">
                                                 <form action="{{ route('logout')}}" method="POST" class="d-flex justify-content-center">
                                                     @csrf
-                                                    <button class="btn bg-dark text-white col-10" type="submit"><i class="zmdi zmdi-power mr-2"></i>Logout</button>
+                                                    <button class="btn bg-dark text-white col-10" type="submit"><i class="fa-solid fa-right-from-bracket mr-2"></i>Logout</button>
                                                 </form>
                                             </div>
                                         </div>
