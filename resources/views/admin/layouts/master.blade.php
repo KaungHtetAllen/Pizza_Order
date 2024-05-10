@@ -113,7 +113,11 @@
                                 <div class="account-wrap">
                                     <div class="account-item clearfix js-item-menu">
                                         <div class="image">
+                                            @if (Auth::user()->image == null)
+                                            <img src="{{ asset('image/default_user.jpg')}}" alt="John Doe" />
+                                            @else
                                             <img src="{{ asset('admin/images/icon/avatar-01.jpg')}}" alt="John Doe" />
+                                            @endif
                                         </div>
                                         <div class="content">
                                             <a class="js-acc-btn" href="#">{{ Auth::user()->name}}</a>
@@ -122,7 +126,11 @@
                                             <div class="info clearfix">
                                                 <div class="image">
                                                     <a href="#">
+                                                    @if (Auth::user()->image == null)
+                                                        <img src="{{ asset('image/default_user.jpg')}}" alt="John Doe" />
+                                                    @else
                                                         <img src="{{ asset('admin/images/icon/avatar-01.jpg')}}" alt="John Doe" />
+                                                    @endif
                                                     </a>
                                                 </div>
                                                 <div class="content">
@@ -134,7 +142,7 @@
                                             </div>
                                             <div class="account-dropdown__body">
                                                 <div class="account-dropdown__item">
-                                                    <a href="#">
+                                                    <a href="{{ route('admin#details')}}">
                                                         <i class="fa-solid fa-user"></i>Account</a>
                                                 </div>
                                             </div>

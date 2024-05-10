@@ -63,7 +63,7 @@
                 </div>
                 @endif
 
-                
+
 
                 <div class="row">
                     <div class="col-3">
@@ -102,9 +102,8 @@
                         <tbody>
                             @foreach ($categories as $category)
                             <tr class="tr-shadow">
-                                <td></td>
                                 <td>{{ $category->id }}</td>
-                                <td class="col-6">{{ $category->name}}</td>
+                                <td>{{ $category->name}}</td>
                                 <td>{{ $category->created_at->format('d-M-Y')}}</td>
                                 <td>
                                     <div class="table-data-feature">
