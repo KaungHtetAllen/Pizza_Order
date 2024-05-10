@@ -24,7 +24,7 @@
                                 @if (Auth::user()->image == null)
                                 <img src="{{ asset('image/default_user.jpg')}}" alt="John Doe" class='img-thumbnail shadow-sm'/>
                                 @else
-                                <img src="{{ asset('admin/images/icon/avatar-01.jpg')}}" alt="John Doe" />
+                                <img src="{{ asset('admin/images/icon/avatar-01.jpg')}}" alt="John Doe" class='img-thumbnail shadow-sm' />
                                 @endif
                             </div>
                             <div class="col-5 offset-1">
@@ -37,7 +37,9 @@
                         </div>
                         <div class="row mt-3">
                             <div class="col-3 offset-2 text-center">
-                                <button class="btn bg-dark text-white"><i class="fa-solid fa-pen-to-square mr-2"></i>Edit Profile</button>
+                                <a href="{{ route('admin#edit')}}">
+                                    <button class="btn bg-dark text-white"><i class="fa-solid fa-pen-to-square mr-2"></i>Edit Profile</button>
+                                </a>
                             </div>
                         </div>
                     </div>
