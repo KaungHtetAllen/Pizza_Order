@@ -8,8 +8,8 @@
     <div class="section__content section__content--p30">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-3 offset-8">
-                    <a href="{{ route('admin#details')}}"><button class="btn bg-dark text-white my-3">back</button></a>
+                <div class="col-3 offset-1">
+                    <a href="{{ route('admin#details')}}"><button class="btn bg-dark text-white my-3 ml-3"><i class="fa-solid fa-arrow-left mr-2"></i>back</button></a>
                 </div>
             </div>
             <div class="col-lg-10 offset-1">
@@ -19,14 +19,14 @@
                             <h3 class="text-center title-2">Edit Account Profile </h3>
                         </div>
                         <hr>
-                        <form action="">
+                        <form action="{{ route('admin#update',Auth::user()->id)}}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="row">
                                 <div class="col-4 offset-1">
                                      @if (Auth::user()->image == null)
                                      <img src="{{ asset('image/default_user.jpg')}}" alt="John Doe" class='img-thumbnail shadow-sm'/>
                                      @else
-                                     <img src="{{ asset('admin/images/icon/avatar-01.jpg')}}" alt="John Doe" class="img-thumbnail shadow-sm" />
+                                     <img src="{{ asset('storage/'.Auth::user()->image)}}" alt="John Doe" class='img-thumbnail shadow-sm' />
                                      @endif
 
                                      <div class="form-group mt-3">
@@ -59,6 +59,19 @@
                                     <div class="form-group">
                                         <label for="cc-payment" class="control-label mb-1">Phone</label>
                                         <input id="cc-pament" name="phone" value="{{ old('phone',Auth::user()->phone)}}" type="number" class="form-control  @error('phone') is-invalid @enderror" aria-required="true" aria-invalid="false" placeholder="Enter Phone...">
+                                        @error('phone')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="cc-payment" class="control-label mb-1">Gender</label>
+                                        <select name="gender" class="form-control @error('gender') is-invalid @enderror">
+                                            <option value="">Choose Gender ...</option>
+                                            <option value="male" @if (Auth::user()->gender == 'male') selected @endif>Male</option>
+                                            <option value="female" @if (Auth::user()->gender == 'female') selected @endif>Female</option>
+                                        </select>
                                         @error('phone')
                                             <div class="invalid-feedback">
                                                 {{ $message }}

@@ -31,6 +31,17 @@
             @enderror
         </div>
         <div class="form-group">
+            <label>Gender</label>
+            <select name="gender" class="au-input au-input--full form-control">
+                <option value="">Choose Gender ...</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+            </select>
+            @error('gender')
+                <small class="text-danger">{{ $message }}</small>
+            @enderror
+        </div>
+        <div class="form-group">
             <label>Address</label>
             <input class="au-input au-input--full" type="text" name="address" placeholder="Address">
             @error('address')
@@ -45,7 +56,7 @@
             @enderror
         </div>
         <div class="form-group">
-            <label>Password</label>
+            <label>Confirm Password</label>
             <input class="au-input au-input--full" type="password" name="password_confirmation" placeholder="Confirm Password">
             @error('password_confirmation')
                 <small class="text-danger">{{ $message }}</small>
