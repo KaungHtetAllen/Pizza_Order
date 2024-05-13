@@ -30,7 +30,12 @@
                                      @endif
 
                                      <div class="form-group mt-3">
-                                        <input type="file" name="image" id="" class="form-control">
+                                        <input type="file" name="image" id="" class="form-control @error('image') is-invalid @enderror">
+                                        @error('image')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
                                      </div>
 
                                      <div class=" text-center">

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AdminController;
@@ -40,6 +41,13 @@ Route::middleware(['auth'])->group(function () {
             Route::get('delete/{id}', [CategoryController::class,'delete'])->name('category#delete');
             Route::get('edit/{id}', [CategoryController::class,'edit'])->name('category#edit');
             Route::post('update', [CategoryController::class,'update'])->name('category#update');
+
+        //product
+        Route::prefix('product')->group(function(){
+            Route::get('list',[ProductController::class,'list'])->name('product#list');
+            Route::get('create/page',[ProductController::class,'createPage'])->name('product#createPage');
+            Route::post('create',[ProductController::class,'create'])->name('product#create');
+        });
         });
 
         //admin account
