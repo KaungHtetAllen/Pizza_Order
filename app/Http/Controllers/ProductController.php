@@ -11,7 +11,11 @@ class ProductController extends Controller
 {
     //direct product list page
     public function list(){
-        $pizzas = Product::paginate(1);
+        $pizzas = Product::when(request('key'),function($query){
+            $query->where('name','like','%'.request('key').'%');
+        })
+        ->paginate(1);
+        $pizzas->appends(request()->all());
         return view('admin.product.pizzaList',compact('pizzas'));
     }
 
@@ -33,6 +37,18 @@ class ProductController extends Controller
 
         Product::create($data);
         return redirect()->route('product#list');
+    }
+
+    //product delete
+    public function delete($id){
+        Product::where('id',$id)->delete();
+        return redirect()->route('product#list')->with(['deleteSuccess'=>'Product Deleted ...']);
+    }
+
+    //direct edit page
+    public function view($id){
+        $pizza = Product::where('id',$id)->first();
+        return view('admin.product.view',compact('pizza'));
     }
 
     //product validation check

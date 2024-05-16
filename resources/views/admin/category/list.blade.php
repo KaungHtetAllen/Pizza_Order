@@ -132,7 +132,7 @@
                     </div>
                 </div>
                 @else
-                <h3 class=" text-secondary text-center mt-5">There is no Categories Here!</h3>
+                <h3 class=" text-secondary text-center mt-5">There is no <span class="text-danger">{{ request('key')}} </span> Categories Here!</h3>
                 @endif
                 <!-- END DATA TABLE -->
             </div>

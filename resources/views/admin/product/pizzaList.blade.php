@@ -70,7 +70,7 @@
                         <h4 class="text-secondary">Search Key : <span class="text-danger">{{ request('key')}}</span></h4>
                     </div>
                     <div class="col-3 offset-6">
-                        <form action="{{ route('category#list')}}" method="GET">
+                        <form action="{{ route('product#list')}}" method="GET">
                             @csrf
                             <div class="d-flex">
                                 <input type="text" name="key" id="" class="form-control" placeholder="Search ..." value="{{ request('key')}}">
@@ -84,10 +84,11 @@
 
                 <div class="row">
                     <div class="col-5">
-                        <h3><i class="fa-solid fa-database mr-2" title="Total"></i>-</h3>
+                        <h3><i class="fa-solid fa-database mr-2" title="Total"></i>-{{ $pizzas->total()}}</h3>
                     </div>
                 </div>
 
+                @if (count($pizzas) != 0)
                 <div class="table-responsive table-responsive-data2">
                     <table class="table table-data2 text-center">
                         <thead>
@@ -110,12 +111,17 @@
                                 <td><i class="fa-solid fa-eye mr-2"></i>{{ $pizza->view_count}}</td>
                                 <td>
                                     <div class="table-data-feature">
+                                        <a href="{{ route('product#view',$pizza->id)}}">
+                                            <button class="item mr-2" data-toggle="tooltip" data-placement="top" title="View">
+                                                <i class="fa-solid fa-eye"></i>
+                                            </button>
+                                        </a>
                                         <a href="">
                                             <button class="item mr-2" data-toggle="tooltip" data-placement="top" title="Edit">
                                                 <i class="zmdi zmdi-edit"></i>
                                             </button>
                                         </a>
-                                        <a href="">
+                                        <a href="{{ route('product#delete',$pizza->id)}}">
                                             <button class="item" data-toggle="tooltip" data-placement="top" title="Delete">
                                                 <i class="zmdi zmdi-delete"></i>
                                             </button>
@@ -131,12 +137,12 @@
                         </tbody>
                     </table>
                     <div class="mt-1">
-                        {{ $pizzas->appends(request()->query())->links()}}
+                        {{ $pizzas->links()}}
                     </div>
                 </div>
-                {{-- @else
-                <h3 class=" text-secondary text-center mt-5">There is no Categories Here!</h3>
-                @endif --}}
+                @else
+                <h3 class=" text-secondary text-center mt-5">There is no <span class="text-danger">{{ request('key')}} </span>Pizzas Here!</h3>
+                @endif
                 <!-- END DATA TABLE -->
             </div>
         </div>
