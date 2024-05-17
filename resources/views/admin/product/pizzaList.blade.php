@@ -93,11 +93,11 @@
                     <table class="table table-data2 text-center">
                         <thead>
                             <tr>
-                                <th class="col-2 offset-1">Image</th>
+                                <th class="col-2">Image</th>
                                 <th class="col-2">Name</th>
-                                <th class="col-1">Price</th>
+                                <th class="col-2">Price</th>
                                 <th class="col-2">Category</th>
-                                <th class="col-1">View COunt</th>
+                                <th class="col-2">View COunt</th>
                                 <th class="col-2"></th>
                             </tr>
                         </thead>
@@ -116,7 +116,7 @@
                                                 <i class="fa-solid fa-eye"></i>
                                             </button>
                                         </a>
-                                        <a href="">
+                                        <a href="{{ route('product#edit',$pizza->id)}}">
                                             <button class="item mr-2" data-toggle="tooltip" data-placement="top" title="Edit">
                                                 <i class="zmdi zmdi-edit"></i>
                                             </button>

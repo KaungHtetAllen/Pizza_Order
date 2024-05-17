@@ -37,7 +37,7 @@
                                 <img src="{{ asset('storage/'.$pizza->image)}}" alt="John Doe" class='img-thumbnail shadow-sm' />
                             </div>
                             <div class="col-7">
-                                <span class="my-3 btn bg-dark text-white" title="name"><i class="fa-solid fa-pizza-slice mr-2"></i>{{ $pizza->name}}</span>
+                                <span class="my-3 btn bg-danger text-white" title="name"><i class="fa-solid fa-pizza-slice mr-2"></i>{{ $pizza->name}}</span>
                                 <span class="my-3 btn bg-dark text-white" title="price"><i class="fa-solid fa-money-bill-wave mr-2"></i>{{ $pizza->price}} kyats</span>
                                 <span class="my-3 btn bg-dark text-white" title="waiting time"><i class="fa-solid fa-hourglass-half mr-2"></i>{{ $pizza->waiting_time}} minutes</span>
                                 <span class="my-3 btn bg-dark text-white" title="category"><i class="fa-solid fa-layer-group mr-2"></i>{{ $pizza->category_id}} </span>
@@ -49,13 +49,13 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row mt-3">
+                        {{-- <div class="row mt-3">
                             <div class="col-3 offset-2 text-center">
                                 <a href="{{ route('admin#edit')}}">
                                     <button class="btn bg-dark text-white"><i class="fa-solid fa-pen-to-square mr-2"></i>Edit Profile</button>
                                 </a>
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
             </div>

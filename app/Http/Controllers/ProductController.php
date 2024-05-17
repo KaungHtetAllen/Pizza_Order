@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Category;
 use App\Models\Product;
+use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
 class ProductController extends Controller
@@ -27,7 +28,7 @@ class ProductController extends Controller
 
     //product create
     public function create(Request $request){
-        $this->productValidationCheck($request);
+        $this->productValidationCheck($request,'create');
         $data = $this->requestProductData($request);
 
         //for image
@@ -45,22 +46,56 @@ class ProductController extends Controller
         return redirect()->route('product#list')->with(['deleteSuccess'=>'Product Deleted ...']);
     }
 
-    //direct edit page
+    //direct product view page
     public function view($id){
         $pizza = Product::where('id',$id)->first();
         return view('admin.product.view',compact('pizza'));
     }
 
+    //direct product edit page
+    public function edit($id){
+        $categories = Category::get();
+        $pizza = Product::where('id',$id)->first();
+        return view('admin.product.edit',compact('pizza','categories'));
+    }
+
+    //product update
+    public function update(Request $request){
+        $this->productValidationCheck($request,'update');
+        $data = $this->requestProductData($request);
+
+        //for image
+        $oldImage = Product::where('id',$request->pizzaId)->first();
+        $oldImage = $oldImage->image;
+
+        if($request->hasFile('pizzaImage')){
+
+            if($oldImage != null){
+                Storage::delete('public/'.$oldImage);
+            }
+
+            $newImage = uniqid() . $request->file('pizzaImage')->getClientOriginalName();
+            $data['image'] = $newImage;
+            $request->file('pizzaImage')->storeAs('public',$newImage);
+
+        }
+
+        Product::where('id',$request->pizzaId)->update($data);
+        return redirect()->route('product#list')->with(['updateSuccess'=>'Product Updated ...']);
+    }
+
     //product validation check
-    private function productValidationCheck($request){
-        Validator::make($request->all(),[
-            'pizzaName'=>'required|unique:products,name,',
+    private function productValidationCheck($request,$action){
+        $validationRules = [
+            'pizzaName'=>'required|unique:products,name,' . $request->pizzaId,
             'pizzaCategory'=>'required',
             'pizzaDescription'=>'required',
-            'pizzaImage'=>'required|mimes:jpg,png,jpeg|file',
             'pizzaPrice'=>'required',
             'pizzaWaitingTime'=>'required',
-        ])->validate();
+        ];
+
+        $validationRules['pizzaImage'] = $action == 'create' ? 'required|mimes:jpg,png,jpeg|file' : 'mimes:jpg,png,jpeg|file';
+        Validator::make($request->all(),$validationRules)->validate();
     }
 
     //request product data
