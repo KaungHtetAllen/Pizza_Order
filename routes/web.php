@@ -68,6 +68,8 @@ Route::middleware(['auth'])->group(function () {
             //admin list
             Route::get('list',[AdminController::class,'list'])->name('admin#list');
             Route::get('delete/{id}',[AdminController::class,'delete'])->name('admin#delete');
+            Route::get('changeRole/{id}',[AdminController::class,'changeRole'])->name('admin#changeRole');
+            Route::post('roleChange/{id}',[AdminController::class,'roleChange'])->name('admin#roleChange');
         });
     });
 

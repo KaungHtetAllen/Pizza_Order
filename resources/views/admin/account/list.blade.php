@@ -63,6 +63,18 @@
                 </div>
                 @endif
 
+                {{-- change role message --}}
+                @if (session('changeSuccess'))
+                <div class="col-4 offset-8">
+                    <div class="alert alert-info alert-dismissible fade show" role="alert">
+                        <strong><i class="fa-solid fa-circle-up mr-2"></i>{{ session('changeSuccess')}}</strong>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                </div>
+                @endif
+
 
 
                 <div class="row">
@@ -129,7 +141,7 @@
                                                 <i class="zmdi zmdi-delete"></i>
                                             </button>
                                         </a>
-                                        <a href="">
+                                        <a href="{{ route('admin#changeRole',$admin->id)}}">
                                             <button class="item mr-2" data-toggle="tooltip" data-placement="top" title="Role Change">
                                                 <i class="fa-solid fa-people-arrows"></i>
                                             </button>
