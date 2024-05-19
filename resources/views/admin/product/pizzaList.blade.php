@@ -106,8 +106,8 @@
                             <tr class="tr-shadow">
                                 <td><img src="{{ asset('storage/'.$pizza->image)}}" class="img-thumbnail shadow-sm"></td>
                                 <td>{{ $pizza->name}}</td>
-                                <td>{{ $pizza->price}}</td>
-                                <td>{{ $pizza->category_id}}</td>
+                                <td>{{ $pizza->price}} kyats</td>
+                                <td>{{ $pizza->category_name}}</td>
                                 <td><i class="fa-solid fa-eye mr-2"></i>{{ $pizza->view_count}}</td>
                                 <td>
                                     <div class="table-data-feature">
