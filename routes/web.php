@@ -84,6 +84,15 @@ Route::middleware(['auth'])->group(function () {
 
         //user home page
         Route::get('/homePage',[UserController::class,'home'])->name('user#home');
+
+        //account
+        Route::prefix('account')->group(function(){
+            Route::get('changePasswordPage',[UserController::class,'changePasswordPage'])->name('account#changePasswordPage');
+            Route::post('changePassword',[UserController::class,'changePassword'])->name('account#changePassword');
+            Route::get('profile',[UserController::class,'profile'])->name('account#profile');
+            Route::get('edit',[UserController::class,'edit'])->name('account#edit');
+            Route::post('update/{id}',[UserController::class,'update'])->name('account#update');
+        });
     });
 });
 

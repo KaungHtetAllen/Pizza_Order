@@ -1,23 +1,7 @@
-{{-- <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
-    <h1>User Home Page</h1>
-    Role- {{ Auth::user()->role}}
-
-    <form action="{{ route('logout')}}" method="POST">
-        @csrf
-        <button>Logout</button>
-    </form>
-</body>
-</html> --}}
 
 @extends('user.layouts.master')
+
+@section('title','Home Page')
 
 @section('content')
  <!-- Shop Start -->
@@ -26,10 +10,10 @@
         <!-- Shop Sidebar Start -->
         <div class="col-lg-3 col-md-4">
             <!-- Price Start -->
-            <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Filter by price</span></h5>
+            <h5 class="section-title position-relative text-uppercase mb-3"><span class=" pr-3">Filter by price</span></h5>
             <div class="bg-light p-4 mb-30">
                 <form>
-                    <div class="d-flex align-items-center justify-content-between mb-3 bg-dark text-white px-3 py-1" style="font-weight: 800">
+                    <div class="d-flex align-items-center justify-content-between mb-3 bg-dark text-white px-3 py-1" style="font-weight: 700">
                         <label class="mt-2" for="price-all">Categories</label>
                         <span class="badge" style="font-size: 15px">{{ count($categories)}}</span>
                     </div>
@@ -63,19 +47,23 @@
                         </div>
                         <div class="ml-2">
                             <div class="btn-group">
+                                {{-- password change alert message --}}
+                                @if (session('updateSuccess'))
+                                <div class="col-12">
+                                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                        <strong><i class="fa-solid fa-cloud-arrow-up mr-2"></i>{{ session('updateSuccess')}}</strong>
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                          <span aria-hidden="true">&times;</span>
+                                        </button>
+                                      </div>
+                                </div>
+                                @endif
+                            </div>
+                            <div class="btn-group">
                                 <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">Sorting</button>
                                 <div class="dropdown-menu dropdown-menu-right">
-                                    <a class="dropdown-item" href="#">Latest</a>
-                                    <a class="dropdown-item" href="#">Popularity</a>
-                                    <a class="dropdown-item" href="#">Best Rating</a>
-                                </div>
-                            </div>
-                            <div class="btn-group ml-2">
-                                <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">Showing</button>
-                                <div class="dropdown-menu dropdown-menu-right">
-                                    <a class="dropdown-item" href="#">10</a>
-                                    <a class="dropdown-item" href="#">20</a>
-                                    <a class="dropdown-item" href="#">30</a>
+                                    <a class="dropdown-item" href="#">Ascending</a>
+                                    <a class="dropdown-item" href="#">Descending</a>
                                 </div>
                             </div>
                         </div>
