@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\User\AjaxController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AdminController;
@@ -92,6 +93,11 @@ Route::middleware(['auth'])->group(function () {
             Route::get('profile',[UserController::class,'profile'])->name('account#profile');
             Route::get('edit',[UserController::class,'edit'])->name('account#edit');
             Route::post('update/{id}',[UserController::class,'update'])->name('account#update');
+        });
+
+
+        Route::prefix('ajax')->group(function(){
+            Route::get('pizzaList',[AjaxController::class,'pizzaList'])->name('ajax#pizzaList');
         });
     });
 });
