@@ -86,6 +86,9 @@ Route::middleware(['auth'])->group(function () {
         //user home page
         Route::get('/homePage',[UserController::class,'home'])->name('user#home');
 
+        //filter category
+        Route::get('filter/{id}',[UserController::class,'filter'])->name('user#filter');
+
         //account
         Route::prefix('account')->group(function(){
             Route::get('changePasswordPage',[UserController::class,'changePasswordPage'])->name('account#changePasswordPage');

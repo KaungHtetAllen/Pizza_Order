@@ -18,9 +18,16 @@
                         <span class="badge" style="font-size: 15px">{{ count($categories)}}</span>
                     </div>
                     <hr>
+                    <div class="d-flex align-items-center justify-content-between mb-3">
+                        <a href="{{ route('user#home')}}" class="text-dark">
+                            <label class="" for="price-1">All</label>
+                        </a>
+                    </div>
                     @foreach ($categories as $category)
                     <div class="d-flex align-items-center justify-content-between mb-3">
-                        <label class="c" for="price-1">{{ $category->name }}</label>
+                        <a href="{{ route('user#filter',$category->id)}}" class="text-dark">
+                            <label class="" for="price-1">{{ $category->name }}</label>
+                        </a>
                     </div>
                     @endforeach
 
@@ -70,6 +77,7 @@
                     </div>
                 </div>
                 <div id="dataList" class="row">
+                    @if (count($pizzas) != 0)
                     @foreach ($pizzas as $pizza)
                     <div class="col-lg-4 col-md-6 col-sm-6 pb-1"  id="myForm">
                         <div class="product-item bg-light mb-4">
@@ -96,6 +104,9 @@
                         </div>
                     </div>
                     @endforeach
+                    @else
+                    <h3 class="text-center text-dark py-5 mt-5">There is no Pizza!</h3>
+                    @endif
                 </div>
             </div>
         </div>
