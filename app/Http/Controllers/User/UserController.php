@@ -89,6 +89,13 @@ class UserController extends Controller
         return back()->with(['notMatch'=>'The old password is wrong! Try again.']);
     }
 
+    //direct pizza details page
+    public function details($id){
+        $pizza = Product::where('id',$id)->first();
+        $pizzaList = Product::get();
+        return view('user.main.detail',compact('pizza','pizzaList'));
+    }
+
 
     //get user data
     private function getUserData($request){

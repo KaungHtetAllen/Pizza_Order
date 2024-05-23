@@ -98,9 +98,14 @@ Route::middleware(['auth'])->group(function () {
             Route::post('update/{id}',[UserController::class,'update'])->name('account#update');
         });
 
-
+        //ajax
         Route::prefix('ajax')->group(function(){
             Route::get('pizzaList',[AjaxController::class,'pizzaList'])->name('ajax#pizzaList');
+        });
+
+        //pizza
+        Route::prefix('pizza')->group(function(){
+            Route::get('details/{id}',[UserController::class,'details'])->name('pizza#details');
         });
     });
 });
