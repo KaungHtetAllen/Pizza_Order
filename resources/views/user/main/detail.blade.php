@@ -34,14 +34,17 @@
                                 <i class="fa fa-minus"></i>
                             </button>
                         </div>
-                        <input type="text" class="form-control bg-secondary border-0 text-center" value="1">
+                        <input type="text" class="form-control bg-secondary border-0 text-center" value="1" id="orderCount">
                         <div class="input-group-btn">
                             <button class="btn btn-warning btn-plus">
                                 <i class="fa fa-plus"></i>
                             </button>
                         </div>
                     </div>
-                    <button class="btn btn-warning px-3"><i class="fa fa-shopping-cart mr-1"></i> Add To
+
+                    <input type="text" class="form-control bg-secondary border-0 text-center" value="{{ Auth::user()->id}}" id="userId" hidden>
+                    <input type="text" class="form-control bg-secondary border-0 text-center" value="{{ $pizza->id}}" id="pizzaId" hidden>
+                    <button type="btn" class="btn btn-warning px-3" id="addCartBtn"><i class="fa fa-shopping-cart mr-1"></i> Add To
                         Cart</button>
                 </div>
                 <div class="d-flex pt-2">
@@ -107,4 +110,39 @@
 
 
 
+@endsection
+
+@section('scriptSource')
+<script>
+    $(document).ready(function(){
+        $('#addCartBtn').click(function(){
+            // alert($('#orderCount').val());
+
+            $count = $('#orderCount').val();
+            $userId = $('#userId').val();
+            $pizzaId = $('#pizzaId').val();
+
+            // alert($userId);
+            $source = {
+                'userId' : $userId,
+                'pizzaId' : $pizzaId,
+                'count': $count,
+            };
+
+            // alert($source);
+
+            $.ajax({
+                type:'get',
+                url:'http://127.0.0.1:8000/user/ajax/addToCart',
+                dataType:'json',
+                data: $source,
+                success : function(response){
+                    if(response.status == 'success'){
+                        window.location.href = 'http://127.0.0.1:8000/user/homePage';
+                    }
+                }
+            })
+        })
+    })
+</script>
 @endsection
