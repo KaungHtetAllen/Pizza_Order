@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use Carbon\Carbon;
+use App\Models\Cart;
 use App\Models\User;
 use App\Models\Product;
 use App\Models\Category;
@@ -19,7 +20,8 @@ class UserController extends Controller
     public function home(){
         $pizzas = Product::orderBy('created_at','desc')->get();
         $categories = Category::get();
-        return view('user.main.home',compact('pizzas','categories'));
+        $carts = Cart::where('user_id',Auth::user()->id)->get();
+        return view('user.main.home',compact('pizzas','categories','carts'));
     }
 
     //filter category
@@ -94,6 +96,22 @@ class UserController extends Controller
         $pizza = Product::where('id',$id)->first();
         $pizzaList = Product::get();
         return view('user.main.detail',compact('pizza','pizzaList'));
+    }
+
+    //direct cart list page
+    public function cartList(){
+        $carts = Cart::select('carts.*','products.name as pizza_name','products.price as pizza_price')
+                ->leftJoin('products','carts.product_id','products.id')
+                ->where('carts.user_id',Auth::user()->id)
+                ->get();
+        $totalPrice = 0;
+        foreach ($carts as $cart) {
+            $price = $cart->pizza_price;
+            $quantity = $cart->quantity;
+            $totalPrice += $price * $quantity;
+        }
+        // dd($totalPrice);
+        return view('user.main.cart',compact('carts','totalPrice'));
     }
 
 

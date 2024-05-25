@@ -108,6 +108,11 @@ Route::middleware(['auth'])->group(function () {
         Route::prefix('pizza')->group(function(){
             Route::get('details/{id}',[UserController::class,'details'])->name('pizza#details');
         });
+
+        //cart
+        Route::prefix('cart')->group(function(){
+            Route::get('list',[UserController::class,'cartList'])->name('user#cartList');
+        });
     });
 });
 
