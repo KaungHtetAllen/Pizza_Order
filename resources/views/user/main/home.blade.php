@@ -123,7 +123,8 @@
 
 @section('scriptSource')
 <script>
-    $(document).ready(function(){
+
+$(document).ready(function(){
         $('#sortingOption').change(function(){
             $sortingStatus = $('#sortingOption').val();
 
@@ -214,5 +215,6 @@
             }
         })
     })
+
 </script>
 @endsection
