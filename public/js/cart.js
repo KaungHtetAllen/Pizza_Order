@@ -27,15 +27,7 @@ $(document).ready(function(){
 
     });
 
-    //remove button click
-    $('.btnRemove').click(function(){
-        $parentNode = $(this).parents('tr');
-        $parentNode.remove();
-        $totalPrice = 0;
-
-        summaryCalculation();
-
-    });
+   
 
 
     function summaryCalculation(){

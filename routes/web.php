@@ -89,6 +89,9 @@ Route::middleware(['auth'])->group(function () {
         //filter category
         Route::get('filter/{id}',[UserController::class,'filter'])->name('user#filter');
 
+        //history page
+        Route::get('history',[UserController::class,'history'])->name('user#history');
+
         //account
         Route::prefix('account')->group(function(){
             Route::get('changePasswordPage',[UserController::class,'changePasswordPage'])->name('account#changePasswordPage');
@@ -102,6 +105,9 @@ Route::middleware(['auth'])->group(function () {
         Route::prefix('ajax')->group(function(){
             Route::get('pizzaList',[AjaxController::class,'pizzaList'])->name('ajax#pizzaList');
             Route::get('addToCart',[AjaxController::class,'addToCart'])->name('ajax#addToCart');
+            Route::get('order',[AjaxController::class,'order'])->name('ajax#order');
+            Route::get('clearAll',[AjaxController::class,'clearAll'])->name('ajax#clearAll');
+            Route::get('clearCart',[AjaxController::class,'clearCart'])->name('ajax#clearCart');
         });
 
         //pizza

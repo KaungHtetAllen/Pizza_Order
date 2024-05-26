@@ -34,7 +34,7 @@
                                 <i class="fa fa-minus"></i>
                             </button>
                         </div>
-                        <input type="text" class="form-control bg-secondary border-0 text-center" value="1" id="orderCount">
+                        <input type="text" class="form-control border-0 text-center" value="1" id="orderCount">
                         <div class="input-group-btn">
                             <button class="btn btn-warning btn-plus">
                                 <i class="fa fa-plus"></i>

@@ -4,17 +4,16 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use PhpParser\Builder\Declaration;
 
-class Order extends Model
+class OrderList extends Model
 {
     use HasFactory;
 
-    // Declaration
     protected $fillable = [
         'user_id',
+        'product_id',
+        'quantity',
+        'total',
         'order_code',
-        'total_price',
-        'status',
     ];
 }

@@ -48,14 +48,25 @@
             <div class="row pb-3">
                 <div class="col-12 pb-1">
                     <div class="d-flex align-items-center justify-content-between mb-4">
-                        <a href="{{ route('user#cartList')}}">
-                            <button type="button" class="btn btn-dark text-white position-relative">
-                                <i class="fa-solid fa-cart-shopping mr-1"></i>
-                                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-warning text-dark">
-                                  {{ count($carts)}}
-                                </span>
-                              </button>
-                        </a>
+                        <div class="btn-group mt-3" >
+                            <a href="{{ route('user#cartList')}}">
+                                <button type="button" class="btn btn-dark text-white position-relative" title="cart">
+                                    <i class="fa-solid fa-cart-shopping mr-1"></i>
+                                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-warning text-dark">
+                                      {{ count($carts)}}
+                                    </span>
+                                  </button>
+                            </a>
+
+                            <a href="{{route('user#history')}}" class="ml-3">
+                                <button type="button" class="btn btn-dark text-white position-relative" title="history">
+                                    History<i class="fa-solid fa-clock-rotate-left ml-2"></i>
+                                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-warning text-dark">
+                                      {{ count($orders)}}
+                                    </span>
+                                  </button>
+                            </a>
+                        </div>
                         <div class="ml-2">
                             <div class="btn-group">
                                 {{-- password change alert message --}}
@@ -70,7 +81,7 @@
                                 </div>
                                 @endif
                             </div>
-                            <div class="btn-group">
+                            <div class="btn-group mt-3">
                                 <select name="sorting" id="sortingOption" class="form-control" style="cursor: pointer">
                                     <option value="">Choose Option ...</option>
                                     <option value="asc">Ascending</option>

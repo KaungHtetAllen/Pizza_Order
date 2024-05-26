@@ -5,6 +5,7 @@ namespace App\Http\Controllers\User;
 use Carbon\Carbon;
 use App\Models\Cart;
 use App\Models\User;
+use App\Models\Order;
 use App\Models\Product;
 use App\Models\Category;
 use Illuminate\Http\Request;
@@ -21,14 +22,18 @@ class UserController extends Controller
         $pizzas = Product::orderBy('created_at','desc')->get();
         $categories = Category::get();
         $carts = Cart::where('user_id',Auth::user()->id)->get();
-        return view('user.main.home',compact('pizzas','categories','carts'));
+        $orders = Order::where('user_id',Auth::user()->id)->get();
+        return view('user.main.home',compact('pizzas','categories','carts','orders'));
     }
 
     //filter category
     public function filter($categoryId){
         $pizzas = Product::where('category_id',$categoryId)->orderBy('created_at','desc')->get();
         $categories = Category::get();
-        return view('user.main.home',compact('pizzas','categories'));
+        $carts = Cart::where('user_id',Auth::user()->id)->get();
+        $orders = Order::where('user_id',Auth::user()->id)->get();
+
+        return view('user.main.home',compact('pizzas','categories','carts','orders'));
     }
 
     //direct  change password page
@@ -100,7 +105,7 @@ class UserController extends Controller
 
     //direct cart list page
     public function cartList(){
-        $carts = Cart::select('carts.*','products.name as pizza_name','products.price as pizza_price')
+        $carts = Cart::select('carts.*','products.name as pizza_name','products.price as pizza_price','products.image as pizza_image')
                 ->leftJoin('products','carts.product_id','products.id')
                 ->where('carts.user_id',Auth::user()->id)
                 ->get();
@@ -114,6 +119,13 @@ class UserController extends Controller
         return view('user.main.cart',compact('carts','totalPrice'));
     }
 
+
+    //direct history page
+    public function history(){
+        $orders = Order::where('user_id',Auth::user()->id)->orderBy('created_at','desc')->paginate(2);
+        $orders->appends(request()->all());
+        return view('user.main.history',compact('orders'));
+    }
 
     //get user data
     private function getUserData($request){
