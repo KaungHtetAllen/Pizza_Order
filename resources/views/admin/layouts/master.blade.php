@@ -57,6 +57,10 @@
                             <a href="{{ route('product#list')}}">
                                 <i class="fa-solid fa-pizza-slice"></i>Product</a>
                         </li>
+                        <li>
+                            <a href="{{ route('order#list')}}">
+                                <i class="fa-solid fa-cash-register"></i>Orders</a>
+                        </li>
                     </ul>
                 </nav>
             </div>
@@ -214,7 +218,7 @@
 
     <!-- Main JS-->
     <script src="{{ asset('admin/js/main.js') }}"></script>
-
+    @yield('scriptSource')
 </body>
 
 </html>

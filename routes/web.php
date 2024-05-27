@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\User\AjaxController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
@@ -43,6 +44,7 @@ Route::middleware(['auth'])->group(function () {
             Route::get('delete/{id}', [CategoryController::class,'delete'])->name('category#delete');
             Route::get('edit/{id}', [CategoryController::class,'edit'])->name('category#edit');
             Route::post('update', [CategoryController::class,'update'])->name('category#update');
+        });
 
         //product
         Route::prefix('product')->group(function(){
@@ -54,6 +56,13 @@ Route::middleware(['auth'])->group(function () {
             Route::get('edit/{id}',[ProductController::class,'edit'])->name('product#edit');
             Route::post('update',[ProductController::class,'update'])->name('product#update');
         });
+
+
+        //order
+        Route::prefix('order')->group(function(){
+                Route::get('list',[OrderController::class,'list'])->name('order#list');
+                Route::get('changeStatus',[OrderController::class,'changeStatus'])->name('order#changeStatus');
+                Route::get('ajax/change/status',[OrderController::class,'ajaxChangeStatus'])->name('order#ajaxChangeStatus');
         });
 
         //admin account
@@ -120,6 +129,7 @@ Route::middleware(['auth'])->group(function () {
             Route::get('list',[UserController::class,'cartList'])->name('user#cartList');
         });
     });
+
 });
 
 
