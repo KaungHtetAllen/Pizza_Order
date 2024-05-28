@@ -109,6 +109,24 @@ class AdminController extends Controller
     }
 
 
+    //direct user List page
+    public function userList(){
+        // dd(request('key'));
+        $users = User::where('role','user')
+                    ->when(request('key'),function($query){
+                        $query->where('name','like','%'.request('key').'%');
+                    })
+                    ->paginate(1);
+        return view('admin.user.list',compact('users'));
+    }
+
+    //change user role
+    public function changeUserRole(Request $request){
+        // logger($request->all());
+        User::where('id',$request->userId)->update(['role'=>$request->role]);
+        return response(['message'=>'success'],200);
+    }
+
     //get user data
     private function getUserData($request){
         return [

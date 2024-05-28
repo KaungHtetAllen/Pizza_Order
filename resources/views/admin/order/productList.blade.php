@@ -13,18 +13,7 @@
                     <div class="table-data__tool-left">
                         <div class="overview-wrap">
                             <h2 class="title-1">Order Product List</h2>
-
                         </div>
-                    </div>
-                    <div class="table-data__tool-right">
-                        <a href="{{ route('product#createPage')}}">
-                            <button class="au-btn au-btn-icon au-btn--green au-btn--small">
-                                <i class="zmdi zmdi-plus"></i>Add Pizza
-                            </button>
-                        </a>
-                        <button class="au-btn au-btn-icon au-btn--green au-btn--small">
-                            CSV download
-                        </button>
                     </div>
                 </div>
                 {{-- insert alert message --}}

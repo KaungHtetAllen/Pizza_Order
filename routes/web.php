@@ -83,6 +83,12 @@ Route::middleware(['auth'])->group(function () {
             Route::get('changeRole/{id}',[AdminController::class,'changeRole'])->name('admin#changeRole');
             Route::post('roleChange/{id}',[AdminController::class,'roleChange'])->name('admin#roleChange');
         });
+
+        //user List
+        Route::prefix('user')->group(function(){
+            Route::get('list',[AdminController::class,'userList'])->name('admin#userList');
+            Route::get('change/role',[AdminController::class,'changeUserRole'])->name('admin#changeUserRole');
+        });
     });
 
 
