@@ -65,10 +65,10 @@
 
 
 
-                <div class="row">
+                {{-- <div class="row">
                     <div class="col-3">
                         <h4 class="text-secondary">Search Key : <span class="text-danger">{{ request('key')}}</span></h4>
-                    </div>
+                    </div> --}}
                     {{-- <div class="col-3 offset-6">
                         <form action="{{ route('order#list')}}" method="GET">
                             @csrf
@@ -80,7 +80,7 @@
                             </div>
                         </form>
                     </div> --}}
-                </div>
+                {{-- </div> --}}
 
                 <div class="row my-5">
                     <div class="col-3">
@@ -128,7 +128,11 @@
                                 <input type="hidden" name="" class="orderId" value="{{ $order->id}}">
                                 <td>{{ $order->user_id}}</td>
                                 <td>{{ $order->user_name}}</td>
-                                <td>{{ $order->order_code}}</td>
+                                <td>
+                                    <a href="{{ route('order#listInfo',$order->order_code)}}">
+                                        {{ $order->order_code}}
+                                    </a>
+                                </td>
                                 <td>{{ $order->created_at->format('d-M-Y')}}</td>
                                 <td>{{ $order->total_price}} kyats</td>
                                 <td >

@@ -63,6 +63,7 @@ Route::middleware(['auth'])->group(function () {
                 Route::get('list',[OrderController::class,'list'])->name('order#list');
                 Route::get('changeStatus',[OrderController::class,'changeStatus'])->name('order#changeStatus');
                 Route::get('ajax/change/status',[OrderController::class,'ajaxChangeStatus'])->name('order#ajaxChangeStatus');
+                Route::get('listInfo/{orderCode}',[OrderController::class,'listInfo'])->name('order#listInfo');
         });
 
         //admin account
