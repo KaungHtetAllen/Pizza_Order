@@ -65,6 +65,10 @@
                             <a href="{{ route('admin#userList')}}">
                                 <i class="fa-solid fa-users"></i>User List</a>
                         </li>
+                        <li>
+                            <a href="{{ route('admin#messageInbox')}}">
+                                <i class="fa-solid fa-envelope-open-text"></i>Inbox</a>
+                        </li>
                     </ul>
                 </nav>
             </div>

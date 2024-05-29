@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Carbon\Carbon;
 use App\Models\User;
+use App\Models\Contact;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -37,7 +38,7 @@ class AdminController extends Controller
 
     //direct account details page
     public function details(){
-        return view('admin.account.deatails');
+        return view('admin.account.details');
     }
 
     //direct account edit page
@@ -82,7 +83,7 @@ class AdminController extends Controller
                   ->orWhere('phone','like','%'.request('key').'%')
                   ->orWhere('address','like','%'.request('key').'%');
         })
-        ->where('role','admin')->paginate(1);
+        ->where('role','admin')->paginate(5);
         $admins->appends(request()->all());
         return view('admin.account.list',compact('admins'));
     }
@@ -108,6 +109,12 @@ class AdminController extends Controller
         return redirect()->route('admin#list')->with(['changeSuccess'=>'Role Changed ....']);
     }
 
+    //ajax role change
+    public function ajaxRoleChange(Request $request){
+        // logger($request->all());
+        User::where('id',$request->adminId)->update(['role'=>$request->currentRole]);
+    }
+
 
     //direct user List page
     public function userList(){
@@ -116,7 +123,7 @@ class AdminController extends Controller
                     ->when(request('key'),function($query){
                         $query->where('name','like','%'.request('key').'%');
                     })
-                    ->paginate(1);
+                    ->paginate(5);
         return view('admin.user.list',compact('users'));
     }
 
@@ -125,6 +132,28 @@ class AdminController extends Controller
         // logger($request->all());
         User::where('id',$request->userId)->update(['role'=>$request->role]);
         return response(['message'=>'success'],200);
+    }
+
+    //delete user
+    public function deleteUser($id){
+        User::where('id',$id)->delete();
+        return back()->with(['deleteSuccess'=>'User Deleted!']);
+    }
+
+    //direct message inbox page
+    public function messageInbox(){
+        $contacts = Contact::when(request('key'),function($query){
+            $query->where('name','like','%'.request('key').'%');
+        })
+        ->orderBy('id','desc')
+        ->paginate(5);
+        return view('admin.contact.inbox',compact('contacts'));
+    }
+
+    //contact message delete
+    public function messageDelete($id){
+        Contact::where('id',$id)->delete();
+        return back()->with(['deleteSuccess'=>'Message Deleted!']);
     }
 
     //get user data

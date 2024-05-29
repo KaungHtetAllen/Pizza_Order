@@ -23,7 +23,7 @@
             <div class="h-100 bg-light p-30">
                 <h3>{{ $pizza->name}}</h3>
                 <div class="d-flex mb-3">
-                    <h6 class="pt-1">{{ $pizza->view_count}} <i class="fa-solid fa-eye"></i></h6>
+                    <h6 class="pt-1">{{ $pizza->view_count +1}} <i class="fa-solid fa-eye"></i></h6>
                 </div>
                 <h3 class="font-weight-semi-bold mb-4">{{ $pizza->price}} kyats</h3>
                 <p class="mb-4">{{ $pizza->description}}</p>
@@ -115,6 +115,16 @@
 @section('scriptSource')
 <script>
     $(document).ready(function(){
+
+        //increase view count
+        $.ajax({
+        type:'get',
+        url:'/user/ajax/increase/viewcount',
+        dataType:'json',
+        data: {'productId':$('#pizzaId').val()}
+    })
+
+    //click add to cart btn
         $('#addCartBtn').click(function(){
             // alert($('#orderCount').val());
 
@@ -133,7 +143,7 @@
 
             $.ajax({
                 type:'get',
-                url:'http://127.0.0.1:8000/user/ajax/addToCart',
+                url:'/user/ajax/addToCart',
                 dataType:'json',
                 data: $source,
                 success : function(response){

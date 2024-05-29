@@ -12,7 +12,7 @@ class CategoryController extends Controller
     public function list(){
         $categories = Category::when(request('key'), function($query){
             $query->where('name','like','%'.request('key').'%');
-        })->orderBy('created_at','desc')->paginate(4);
+        })->orderBy('created_at','desc')->paginate(5);
         return view('admin.category.list', compact('categories'));
     }
 

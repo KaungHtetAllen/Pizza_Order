@@ -117,6 +117,7 @@
                         <tbody>
                             @foreach ($admins as $admin)
                             <tr class="tr-shadow">
+                                <input type="hidden" value="{{ $admin->id}}" id="adminId">
                                 <td>
                                     @if ($admin->image == null)
                                         @if($admin->gender == 'male')
@@ -146,6 +147,13 @@
                                                 <i class="fa-solid fa-people-arrows"></i>
                                             </button>
                                         </a>
+                                        <form action="" id="roleData">
+                                            @csrf
+                                            <select name="role" id="role" class="form-control roleChange">
+                                                <option value="admin" @if($admin->role == 'admin') selected @endif>Admin</option>
+                                                <option value="user" @if($admin->role == 'user') selected @endif>User</option>
+                                            </select>
+                                        </form>
 
                                         @endif
                                         {{-- <button class="item" data-toggle="tooltip" data-placement="top" title="More">
@@ -171,4 +179,30 @@
     </div>
 </div>
 <!-- END MAIN CONTENT-->
+@endsection
+
+@section('scriptSource')
+<script>
+    $(document).ready(function(){
+        $('.roleChange').change(function(){
+            $currentRole = $(this).val();
+            $currentId = $('#adminId').val();
+            // console.log($currentRole,$currentId);
+            $data = {
+                'currentRole':$currentRole,
+                'adminId':$currentId
+            };
+
+            $.ajax({
+                type:'get',
+                url:'http://127.0.0.1:8000/admin/ajax/change/role',
+                dataType:'json',
+                data:$data
+            })
+
+            window.location.href = 'http://127.0.0.1:8000/admin/list';
+
+        })
+    })
+</script>
 @endsection

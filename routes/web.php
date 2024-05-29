@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\User\AjaxController;
 use Illuminate\Support\Facades\Route;
@@ -81,6 +82,7 @@ Route::middleware(['auth'])->group(function () {
             Route::get('list',[AdminController::class,'list'])->name('admin#list');
             Route::get('delete/{id}',[AdminController::class,'delete'])->name('admin#delete');
             Route::get('changeRole/{id}',[AdminController::class,'changeRole'])->name('admin#changeRole');
+            Route::get('ajax/change/role',[AdminController::class,'ajaxRoleChange'])->name('admin#ajaxRoleChange');
             Route::post('roleChange/{id}',[AdminController::class,'roleChange'])->name('admin#roleChange');
         });
 
@@ -88,6 +90,13 @@ Route::middleware(['auth'])->group(function () {
         Route::prefix('user')->group(function(){
             Route::get('list',[AdminController::class,'userList'])->name('admin#userList');
             Route::get('change/role',[AdminController::class,'changeUserRole'])->name('admin#changeUserRole');
+            Route::get('delete/{id}',[AdminController::class,'deleteUser'])->name('admin#deleteUser');
+        });
+
+        //contact inbox message
+        Route::prefix('contact')->group(function(){
+            Route::get('message',[AdminController::class,'messageInbox'])->name('admin#messageInbox');
+            Route::get('delete/{id}',[AdminController::class,'messageDelete'])->name('admin#messageDelete');
         });
     });
 
@@ -124,6 +133,7 @@ Route::middleware(['auth'])->group(function () {
             Route::get('order',[AjaxController::class,'order'])->name('ajax#order');
             Route::get('clearAll',[AjaxController::class,'clearAll'])->name('ajax#clearAll');
             Route::get('clearCart',[AjaxController::class,'clearCart'])->name('ajax#clearCart');
+            Route::get('increase/viewcount',[AjaxController::class,'increaseViewcount'])->name('ajax#increaseViewcount');
         });
 
         //pizza
@@ -135,6 +145,10 @@ Route::middleware(['auth'])->group(function () {
         Route::prefix('cart')->group(function(){
             Route::get('list',[UserController::class,'cartList'])->name('user#cartList');
         });
+
+        //contact
+        Route::get('contact',[ContactController::class,'contactForm'])->name('user#contactForm');
+        Route::post('contact/send',[ContactController::class,'send'])->name('user#send');
     });
 
 });

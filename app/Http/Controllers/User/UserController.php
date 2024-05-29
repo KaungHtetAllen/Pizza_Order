@@ -122,7 +122,7 @@ class UserController extends Controller
 
     //direct history page
     public function history(){
-        $orders = Order::where('user_id',Auth::user()->id)->orderBy('created_at','desc')->paginate(2);
+        $orders = Order::where('user_id',Auth::user()->id)->orderBy('created_at','desc')->paginate(5);
         $orders->appends(request()->all());
         return view('user.main.history',compact('orders'));
     }

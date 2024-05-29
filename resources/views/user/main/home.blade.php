@@ -44,7 +44,46 @@
 
 
         <!-- Shop Product Start -->
+
         <div class="col-lg-9 col-md-8">
+            <div class="row">
+                {{-- insert alert message --}}
+                @if (session('createSuccess'))
+                <div class="col-4 offset-8">
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <strong><i class="fa-solid fa-check mr-2"></i>{{ session('createSuccess')}}</strong>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                </div>
+                @endif
+
+                {{-- delete alert message --}}
+                @if (session('deleteSuccess'))
+                <div class="col-4 offset-8">
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <strong><i class="fa-solid fa-circle-xmark mr-2"></i>{{ session('deleteSuccess')}}</strong>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                </div>
+                @endif
+
+                {{-- update alert message --}}
+                @if (session('updateSuccess'))
+                <div class="col-4 offset-8">
+                    <div class="alert alert-info alert-dismissible fade show" role="alert">
+                        <strong><i class="fa-solid fa-circle-up mr-2"></i>{{ session('updateSuccess')}}</strong>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                </div>
+                @endif
+
+            </div>
             <div class="row pb-3">
                 <div class="col-12 pb-1">
                     <div class="d-flex align-items-center justify-content-between mb-4">

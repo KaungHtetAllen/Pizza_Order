@@ -189,7 +189,7 @@
 
             $.ajax({
                 type:'get',
-                url:'http://127.0.0.1:8000/order/ajax/status',
+                url:'/order/ajax/status',
                 dataType:'json',
                 data:{
                     'status':$status
@@ -264,7 +264,7 @@
 
             $.ajax({
                 type:'get',
-                url:'http://127.0.0.1:8000/order/ajax/change/status',
+                url:'/order/ajax/change/status',
                 dataType:'json',
                 data:$data
             })

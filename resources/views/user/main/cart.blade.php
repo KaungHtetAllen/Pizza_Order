@@ -103,7 +103,7 @@
 
             $.ajax({
                 'type':'get',
-                'url':'http://127.0.0.1:8000/user/ajax/order/',
+                'url':'/user/ajax/order/',
                 'dataType':'json',
                 'data':Object.assign({},$orderList),//For json format, we have to change the array to object.
                 'success':function(response){
@@ -124,7 +124,7 @@
 
             $.ajax({
                 'type':'get',
-                'url': 'http://127.0.0.1:8000/user/ajax/clearAll',
+                'url': '/user/ajax/clearAll',
                 'dataType':'json',
             })
         })
@@ -137,11 +137,11 @@
 
             $.ajax({
                 'type':'get',
-                'url': 'http://127.0.0.1:8000/user/ajax/clearCart',
+                'url': '/user/ajax/clearCart',
                 'dataType':'json',
                 'data':{'cartId':$cartId}
             });
-            
+
             $parentNode.remove();
 
 
