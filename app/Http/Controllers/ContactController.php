@@ -25,7 +25,7 @@ class ContactController extends Controller
         return redirect()->route('user#home')->with(['createSuccess'=>'Message sent!']);
     }
 
-    //contact validation check
+    //contact validation check (Private)
     private function contactValidationCheck($request){
         Validator::make($request->all(),[
             'name'=>'required',

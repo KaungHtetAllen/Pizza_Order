@@ -17,17 +17,6 @@
                         </div>
                     </div>
                 </div>
-                {{-- insert alert message --}}
-                @if (session('createSuccess'))
-                <div class="col-4 offset-8">
-                    <div class="alert alert-success alert-dismissible fade show" role="alert">
-                        <strong><i class="fa-solid fa-check mr-2"></i>{{ session('createSuccess')}}</strong>
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                          <span aria-hidden="true">&times;</span>
-                        </button>
-                      </div>
-                </div>
-                @endif
 
                 {{-- delete alert message --}}
                 @if (session('deleteSuccess'))
@@ -40,20 +29,6 @@
                       </div>
                 </div>
                 @endif
-
-                {{-- update alert message --}}
-                @if (session('updateSuccess'))
-                <div class="col-4 offset-8">
-                    <div class="alert alert-info alert-dismissible fade show" role="alert">
-                        <strong><i class="fa-solid fa-circle-up mr-2"></i>{{ session('updateSuccess')}}</strong>
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                          <span aria-hidden="true">&times;</span>
-                        </button>
-                      </div>
-                </div>
-                @endif
-
-
 
                 <div class="row">
                     <div class="col-3">
@@ -78,10 +53,6 @@
                     </div>
 
                 </div>
-
-
-
-
 
                 @if (count($contacts) != 0)
                 <div class="table-responsive table-responsive-data2">
@@ -122,7 +93,7 @@
                     </div>
                 </div>
                 @else
-                <h3 class=" text-secondary text-center mt-5">There is no message from <span class="text-danger">{{ request('key')}}</span></h3>
+                <h3 class=" text-secondary text-center mt-5">There is no  <span class="text-danger">{{ request('key')}}</span> message! </h3>
                 @endif
                 <!-- END DATA TABLE -->
             </div>
@@ -131,97 +102,3 @@
 </div>
 <!-- END MAIN CONTENT-->
 @endsection
-
-
-{{-- @section('scriptSource')
-<script>
-    $(document).ready(function(){
-        $('#orderStatus').change(function(){
-            $status = $('#orderStatus').val();
-            // console.log($status);
-
-            $.ajax({
-                type:'get',
-                url:'/order/ajax/status',
-                dataType:'json',
-                data:{
-                    'status':$status
-                },
-                success:function(response){
-                    $list = '';
-                    for($i=0;$i<response.length;$i++){
-                        $months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
-
-                        $dbDate = new Date(response[$i].created_at);
-                        // console.log($dbDate.getMonth());
-                        $date = $months[$dbDate.getMonth()] + '-' + $dbDate.getDate() + '-' + $dbDate.getFullYear();
-
-                        $statusMessage = '';
-                        if(response[$i].status == 0){
-                            $statusMessage = `
-                            <select name="status" id="" class="form-control">
-                                <option class="text-warning" value="0" selected>Pending ...</option>
-                                <option class="text-success" value="1">Success ...</option>
-                                <option class="text-danger" value="2">Reject ...</option>
-                            </select>`;
-                        }
-                        else if(response[$i].status == 1){
-                            $statusMessage = `
-                            <select name="status" id="" class="form-control">
-                                <option class="text-warning" value="0">Pending ...</option>
-                                <option class="text-success" value="1" selected>Success ...</option>
-                                <option class="text-danger" value="2">Reject ...</option>
-                            </select>`;
-                        }
-                        else if(response[$i].status == 2){
-                            $statusMessage = `
-                            <select name="status" id="" class="form-control">
-                                <option class="text-warning" value="0">Pending ...</option>
-                                <option class="text-success" value="1">Success ...</option>
-                                <option class="text-danger" value="2" selected>Reject ...</option>
-                            </select>`;
-                        }
-
-                        $list += `
-                        <tr class="tr-shadow">
-                            <td>${ response[$i].user_id}</td>
-                            <td>${ response[$i].user_name} </td>
-                            <td>${ response[$i].order_code} </td>
-                            <td>${$date} </td>
-                            <td>${response[$i].total_price}  kyats</td>
-                            <td>
-                                ${ $statusMessage }
-                            </td>
-                        </tr>
-                        <tr class="spacer"></tr>`;
-
-                    }
-                    $('#dataList').html($list);
-                }
-            });
-        })
-
-
-
-        $('.statusChange').change(function(){
-            // console.log('change');
-            $currentStatus = $(this).val();
-            $parentNode = $(this).parents('tr');
-            $orderId = $parentNode.find('.orderId').val();
-            console.log($currentStatus);
-
-            $data = {
-                'status':$currentStatus,
-                'orderId':$orderId
-            };
-
-            $.ajax({
-                type:'get',
-                url:'/order/ajax/change/status',
-                dataType:'json',
-                data:$data
-            })
-        })
-    })
-</script>
-@endsection --}}

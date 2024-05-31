@@ -26,7 +26,7 @@ class OrderController extends Controller
                         ->leftJoin('users','orders.user_id','users.id')
                         ->orderBy('orders.created_at','desc');
 
-        if ($request->orderStatus == null) {
+        if ($request->orderStatus == 'null') {
             $orders = $orders->get();
         }
         else{

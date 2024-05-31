@@ -34,10 +34,6 @@
                 </form>
             </div>
             <!-- Price End -->
-
-            <div class="">
-                <button class="btn btn btn-warning w-100">Order</button>
-            </div>
             <!-- Size End -->
         </div>
         <!-- Shop Sidebar End -->
@@ -131,14 +127,12 @@
                     </div>
                 </div>
                 <div id="dataList" class="row">
-                    @if (count($pizzas) != 0)
                     @foreach ($pizzas as $pizza)
                     <div class="col-lg-4 col-md-6 col-sm-6 pb-1"  id="myForm">
                         <div class="product-item bg-light mb-4">
                             <div class="product-img position-relative overflow-hidden">
                                 <img class="img-fluid w-100" src="{{ asset('storage/'.$pizza->image)}}" alt="" style="height:230px; object-fit:cover">
                                 <div class="product-action">
-                                    <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
                                     <a class="btn btn-outline-dark btn-square" href="{{route('pizza#details',$pizza->id)}}"><i class="fa-solid fa-circle-info"></i></a>
                                 </div>
                             </div>
@@ -147,20 +141,10 @@
                                 <div class="d-flex align-items-center justify-content-center mt-2">
                                     <h5>{{ $pizza->price}} kyats</h5>
                                 </div>
-                                <div class="d-flex align-items-center justify-content-center mb-1">
-                                    <small class="fa fa-star text-primary mr-1"></small>
-                                    <small class="fa fa-star text-primary mr-1"></small>
-                                    <small class="fa fa-star text-primary mr-1"></small>
-                                    <small class="fa fa-star text-primary mr-1"></small>
-                                    <small class="fa fa-star text-primary mr-1"></small>
-                                </div>
                             </div>
                         </div>
                     </div>
                     @endforeach
-                    @else
-                    <h3 class="text-center text-dark py-5 mt-5">There is no Pizza!</h3>
-                    @endif
                 </div>
             </div>
         </div>
@@ -193,7 +177,6 @@ $(document).ready(function(){
                                     <div class="product-img position-relative overflow-hidden">
                                         <img class="img-fluid w-100" src="{{ asset('storage/${response[$i].image}')}}" alt="" style="height:230px; object-fit:cover">
                                         <div class="product-action">
-                                            <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
                                             <a class="btn btn-outline-dark btn-square" href=""><i class="fa-solid fa-circle-info"></i></a>
                                         </div>
                                     </div>
@@ -201,13 +184,6 @@ $(document).ready(function(){
                                         <a class="h6 text-decoration-none text-truncate" href="">${response[$i].name}</a>
                                         <div class="d-flex align-items-center justify-content-center mt-2">
                                             <h5>${response[$i].price} kyats</h5>
-                                        </div>
-                                        <div class="d-flex align-items-center justify-content-center mb-1">
-                                            <small class="fa fa-star text-primary mr-1"></small>
-                                            <small class="fa fa-star text-primary mr-1"></small>
-                                            <small class="fa fa-star text-primary mr-1"></small>
-                                            <small class="fa fa-star text-primary mr-1"></small>
-                                            <small class="fa fa-star text-primary mr-1"></small>
                                         </div>
                                     </div>
                                 </div>
@@ -242,13 +218,6 @@ $(document).ready(function(){
                                         <a class="h6 text-decoration-none text-truncate" href="">${response[$i].name}</a>
                                         <div class="d-flex align-items-center justify-content-center mt-2">
                                             <h5>${response[$i].price} kyats</h5>
-                                        </div>
-                                        <div class="d-flex align-items-center justify-content-center mb-1">
-                                            <small class="fa fa-star text-primary mr-1"></small>
-                                            <small class="fa fa-star text-primary mr-1"></small>
-                                            <small class="fa fa-star text-primary mr-1"></small>
-                                            <small class="fa fa-star text-primary mr-1"></small>
-                                            <small class="fa fa-star text-primary mr-1"></small>
                                         </div>
                                     </div>
                                 </div>

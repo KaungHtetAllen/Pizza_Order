@@ -51,6 +51,8 @@ class RouteController extends Controller
     }
 
     //category delete
+
+
     // public function categoryDelete(Request $request){
     //     $data = Category::where('id',$request->category_id)->first();
 
@@ -99,6 +101,19 @@ class RouteController extends Controller
             Category::where('id',$categoryId)->update($data);
             $response = Category::where('id',$categoryId)->first();
             return response()->json(['status'=>'true','message'=>'Category Updated!','data'=>$response],200);
+        }
+        else{
+            return response()->json(['status'=>'false','message'=>'Not Found!'],404);
+        }
+    }
+
+
+    //delete contact
+    public function contactDelete($id){
+        $data = Contact::where('id',$id)->first();
+        if(isset($data)){
+            Contact::where('id',$id)->delete();
+            return response()->json(['status'=>'true','message'=>'Success','deletedData'=>$data],200);
         }
         else{
             return response()->json(['status'=>'false','message'=>'Not Found!'],404);

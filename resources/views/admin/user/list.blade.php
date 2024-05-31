@@ -17,17 +17,6 @@
                         </div>
                     </div>
                 </div>
-                {{-- insert alert message --}}
-                @if (session('createSuccess'))
-                <div class="col-4 offset-8">
-                    <div class="alert alert-success alert-dismissible fade show" role="alert">
-                        <strong><i class="fa-solid fa-check mr-2"></i>{{ session('createSuccess')}}</strong>
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                          <span aria-hidden="true">&times;</span>
-                        </button>
-                      </div>
-                </div>
-                @endif
 
                 {{-- delete alert message --}}
                 @if (session('deleteSuccess'))
@@ -40,32 +29,6 @@
                       </div>
                 </div>
                 @endif
-
-                {{-- update alert message --}}
-                @if (session('updateSuccess'))
-                <div class="col-4 offset-8">
-                    <div class="alert alert-info alert-dismissible fade show" role="alert">
-                        <strong><i class="fa-solid fa-circle-up mr-2"></i>{{ session('updateSuccess')}}</strong>
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                          <span aria-hidden="true">&times;</span>
-                        </button>
-                      </div>
-                </div>
-                @endif
-
-                {{-- change role message --}}
-                @if (session('changeSuccess'))
-                <div class="col-4 offset-8">
-                    <div class="alert alert-info alert-dismissible fade show" role="alert">
-                        <strong><i class="fa-solid fa-circle-up mr-2"></i>{{ session('changeSuccess')}}</strong>
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                          <span aria-hidden="true">&times;</span>
-                        </button>
-                      </div>
-                </div>
-                @endif
-
-
 
                 <div class="row">
                     <div class="col-3">

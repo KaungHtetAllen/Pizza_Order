@@ -53,25 +53,6 @@
                 </div>
                 @endif
 
-
-
-                {{-- <div class="row">
-                    <div class="col-3">
-                        <h4 class="text-secondary">Search Key : <span class="text-danger">{{ request('key')}}</span></h4>
-                    </div> --}}
-                    {{-- <div class="col-3 offset-6">
-                        <form action="{{ route('order#list')}}" method="GET">
-                            @csrf
-                            <div class="d-flex">
-                                <input type="text" name="key" id="" class="form-control" placeholder="Search ..." value="{{ request('key')}}">
-                                <button class="btn bg-dark text-white" type="submit">
-                                    <i class="fa-solid fa-magnifying-glass"></i>
-                                </button>
-                            </div>
-                        </form>
-                    </div> --}}
-                {{-- </div> --}}
-
                 <div class="row my-5">
                     <div class="col-3">
                         <h3><i class="fa-solid fa-database mr-2" title="Total"></i>-{{ count($orders)}}</h3>
@@ -82,7 +63,7 @@
                             @csrf
                             <div class="input-group">
                                 <select name="orderStatus" id="orderStatus"class="form-control" id="inputGroupSelect04" aria-label="Example select with button addon">
-                                    <option class="" value="">All</option>
+                                    <option class="" value="null" @if(request('orderStatus') == 'null') selected @endif>All</option>
                                     <option class="text-warning" value="0" @if(request('orderStatus') == 0) selected @endif>Pending ...</option>
                                     <option class="text-success" value="1" @if(request('orderStatus') == 1) selected @endif>Success ...</option>
                                     <option class="text-danger" value="2" @if(request('orderStatus') == 2) selected @endif>Reject ...</option>
@@ -94,10 +75,6 @@
                     </div>
 
                 </div>
-
-
-
-
 
                 @if (count($orders) != 0)
                 <div class="table-responsive table-responsive-data2">
@@ -132,33 +109,11 @@
                                         <option class="text-danger" value="2" @if($order->status == 2) selected @endif>Reject ...</option>
                                     </select>
                                 </td>
-                                {{-- <td>
-                                    <div class="table-data-feature">
-                                        <a href="{{ route('product#view',$pizza->id)}}">
-                                            <button class="item mr-2" data-toggle="tooltip" data-placement="top" title="View">
-                                                <i class="fa-solid fa-eye"></i>
-                                            </button>
-                                        </a>
-                                        <a href="{{ route('product#edit',$pizza->id)}}">
-                                            <button class="item mr-2" data-toggle="tooltip" data-placement="top" title="Edit">
-                                                <i class="zmdi zmdi-edit"></i>
-                                            </button>
-                                        </a>
-                                        <a href="{{ route('product#delete',$pizza->id)}}">
-                                            <button class="item" data-toggle="tooltip" data-placement="top" title="Delete">
-                                                <i class="zmdi zmdi-delete"></i>
-                                            </button>
-                                        </a>
-                                    </div>
-                                </td> --}}
                             </tr>
                             <tr class="spacer"></tr>
                             @endforeach
                         </tbody>
                     </table>
-                    {{-- <div class="mt-1">
-                        {{ $orders->appends(request()->query())->links()}}
-                    </div> --}}
                 </div>
                 @else
                 <h3 class=" text-secondary text-center mt-5">There is no
@@ -168,6 +123,7 @@
                     <span class="text-success">Success</span>
                     @elseif(request('orderStatus') == 2)
                     <span class="text-danger">Reject</span>
+                    @else
                     @endif
                     Orders Here!</h3>
                 @endif
@@ -185,11 +141,11 @@
     $(document).ready(function(){
         $('#orderStatus').change(function(){
             $status = $('#orderStatus').val();
-            // console.log($status);
+            console.log($status);
 
             $.ajax({
                 type:'get',
-                url:'/order/ajax/status',
+                url:'/order/changeStatus',
                 dataType:'json',
                 data:{
                     'status':$status

@@ -16,15 +16,15 @@ class AjaxController extends Controller
     public function pizzaList(Request $request){
         // logger($request->all());
         if($request->status == 'asc'){
-            $data = Product::orderBy('created_at','asc')->get();
+            $data = Product::orderBy('id','asc')->get();
         }
         else{
-            $data = Product::orderBy('created_at','desc')->get();
+            $data = Product::orderBy('id','desc')->get();
         }
         return response()->json($data,200);
     }
 
-    //
+    //add to cart btn click
     public function addToCart(Request $request){
         // logger($request->all());
         $data = $this->getOrderData($request);
@@ -37,7 +37,7 @@ class AjaxController extends Controller
         return response()->json($response,200);
     }
 
-    //
+    //order button click
     public function order(Request $request){
         // logger($request->all());
         $total = 0;
@@ -51,7 +51,7 @@ class AjaxController extends Controller
             ]);
             $total += $item['total'];
         };
-        logger($total);
+        // logger($total);
 
         Cart::where('user_id',Auth::user()->id)->delete();
 
@@ -66,12 +66,12 @@ class AjaxController extends Controller
         return response()->json($message,200);
     }
 
-    //clear all cart btn
+    //clear all cart btn click
     public function clearAll(){
         Cart::where('user_id',Auth::user()->id)->delete();
     }
 
-    //clear cart btn
+    //clear cart btn click
     public function clearCart(Request $request){
         logger($request->all());
         Cart::where('id',$request->cartId)->delete();
@@ -80,14 +80,14 @@ class AjaxController extends Controller
     //increase view count
     public function increaseViewCount(Request $request){
         $pizza = Product::where('id',$request->productId)->first();
-        
+
         $viewCount = [
             'view_count'=> $pizza->view_count + 1
         ];
         Product::where('id',$request->productId)->update($viewCount);
     }
 
-    //get Order Data
+    //get Order Data  (Private)
     private function getOrderData($request){
         return [
             'user_id'=>$request->userId,

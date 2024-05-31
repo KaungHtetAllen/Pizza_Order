@@ -63,7 +63,6 @@ class UserController extends Controller
             $dbImage = User::where('id',$id)->first();
             $dbImage = $dbImage->image;//old image
 
-
             if($dbImage != null){
                 Storage::delete('public/'.$dbImage);
             }
@@ -127,7 +126,7 @@ class UserController extends Controller
         return view('user.main.history',compact('orders'));
     }
 
-    //get user data
+    //get user data (Private)
     private function getUserData($request){
         return [
             'name'=>$request->name,
@@ -139,7 +138,7 @@ class UserController extends Controller
         ];
     }
 
-    //account validation check
+    //account validation check (Private)
     private function accountValidationCheck($request){
         Validator::make($request->all(),[
             'name'=> 'required',
@@ -151,7 +150,7 @@ class UserController extends Controller
         ])->validate();
     }
 
-    // validation check
+    // validation check (Private)
     private function passwordValidationCheck($request){
         Validator::make($request->all(),[
             'oldPassword'=>'required | min:8',

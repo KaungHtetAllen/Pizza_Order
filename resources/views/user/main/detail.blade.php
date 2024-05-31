@@ -73,7 +73,7 @@
 
 <!-- Products Start -->
 <div class="container-fluid py-5">
-    <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4"><span class="bg-secondary pr-3">You May Also Like</span></h2>
+    <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4"><span class="pr-3">You May Also Like</span></h2>
     <div class="row px-xl-5">
         <div class="col">
             <div class="owl-carousel related-carousel">
@@ -82,7 +82,6 @@
                     <div class="product-img position-relative overflow-hidden">
                         <img class="img-fluid w-100" src="{{ asset('storage/'.$p->image)}}" alt="" style="height:300px;object-fit:cover">
                         <div class="product-action">
-                            <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
                             <a class="btn btn-outline-dark btn-square" href="{{ route('pizza#details',$p->id)}}"><i class="fa fa-info-circle"></i></a>
                         </div>
                     </div>
@@ -90,14 +89,6 @@
                         <a class="h6 text-decoration-none text-truncate" href="">{{ $p->name}}</a>
                         <div class="d-flex align-items-center justify-content-center mt-2">
                             <h5>{{ $p->price}} kyats</h5>
-                        </div>
-                        <div class="d-flex align-items-center justify-content-center mb-1">
-                            <small class="fa fa-star text-warning mr-1"></small>
-                            <small class="fa fa-star text-warning mr-1"></small>
-                            <small class="fa fa-star text-warning mr-1"></small>
-                            <small class="fa fa-star text-warning mr-1"></small>
-                            <small class="fa fa-star text-warning mr-1"></small>
-                            <small>(99)</small>
                         </div>
                     </div>
                 </div>

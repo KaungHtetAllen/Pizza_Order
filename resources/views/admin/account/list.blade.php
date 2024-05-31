@@ -13,49 +13,15 @@
                     <div class="table-data__tool-left">
                         <div class="overview-wrap">
                             <h2 class="title-1">Admin List</h2>
-
                         </div>
                     </div>
-                    <div class="table-data__tool-right">
-                        <a href="{{ route('category#createPage')}}">
-                            <button class="au-btn au-btn-icon au-btn--green au-btn--small">
-                                <i class="zmdi zmdi-plus"></i>Add Category
-                            </button>
-                        </a>
-                        <button class="au-btn au-btn-icon au-btn--green au-btn--small">
-                            CSV download
-                        </button>
-                    </div>
                 </div>
-                {{-- insert alert message --}}
-                @if (session('createSuccess'))
-                <div class="col-4 offset-8">
-                    <div class="alert alert-success alert-dismissible fade show" role="alert">
-                        <strong><i class="fa-solid fa-check mr-2"></i>{{ session('createSuccess')}}</strong>
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                          <span aria-hidden="true">&times;</span>
-                        </button>
-                      </div>
-                </div>
-                @endif
 
                 {{-- delete alert message --}}
                 @if (session('deleteSuccess'))
                 <div class="col-4 offset-8">
                     <div class="alert alert-danger alert-dismissible fade show" role="alert">
                         <strong><i class="fa-solid fa-circle-xmark mr-2"></i>{{ session('deleteSuccess')}}</strong>
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                          <span aria-hidden="true">&times;</span>
-                        </button>
-                      </div>
-                </div>
-                @endif
-
-                {{-- update alert message --}}
-                @if (session('updateSuccess'))
-                <div class="col-4 offset-8">
-                    <div class="alert alert-info alert-dismissible fade show" role="alert">
-                        <strong><i class="fa-solid fa-circle-up mr-2"></i>{{ session('updateSuccess')}}</strong>
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                           <span aria-hidden="true">&times;</span>
                         </button>
@@ -74,8 +40,6 @@
                       </div>
                 </div>
                 @endif
-
-
 
                 <div class="row">
                     <div class="col-3">
@@ -156,9 +120,6 @@
                                         </form>
 
                                         @endif
-                                        {{-- <button class="item" data-toggle="tooltip" data-placement="top" title="More">
-                                            <i class="zmdi zmdi-more"></i>
-                                        </button> --}}
                                     </div>
                                 </td>
                             </tr>
@@ -185,24 +146,28 @@
 <script>
     $(document).ready(function(){
         $('.roleChange').change(function(){
-            $currentRole = $(this).val();
-            $currentId = $('#adminId').val();
-            // console.log($currentRole,$currentId);
-            $data = {
-                'currentRole':$currentRole,
-                'adminId':$currentId
-            };
+        // console.log('change');
+        $currentRole = $(this).val();
+        $parentNode = $(this).parents('tr');
+        $adminId = $parentNode.find('#adminId').val();
+        // console.log($currentRole);
 
-            $.ajax({
-                type:'get',
-                url:'http://127.0.0.1:8000/admin/ajax/change/role',
-                dataType:'json',
-                data:$data
-            })
+        $data = {
+            'role':$currentRole,
+            'adminId':$adminId
+        };
+        // console.log($data);
 
-            window.location.href = 'http://127.0.0.1:8000/admin/list';
-
+        $.ajax({
+            type:'get',
+            url:'/admin/ajax/change/role',
+            dataType:'json',
+            data:$data,
+            success:function(response){
+                window.location.href = '/admin/list';
+            }
         })
+    })
     })
 </script>
 @endsection

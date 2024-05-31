@@ -47,6 +47,7 @@ Route::middleware(['auth'])->group(function () {
             Route::post('update', [CategoryController::class,'update'])->name('category#update');
         });
 
+
         //product
         Route::prefix('product')->group(function(){
             Route::get('list',[ProductController::class,'list'])->name('product#list');
@@ -67,6 +68,7 @@ Route::middleware(['auth'])->group(function () {
                 Route::get('listInfo/{orderCode}',[OrderController::class,'listInfo'])->name('order#listInfo');
         });
 
+
         //admin account
         Route::prefix('admin')->group(function(){
             //password
@@ -86,12 +88,14 @@ Route::middleware(['auth'])->group(function () {
             Route::post('roleChange/{id}',[AdminController::class,'roleChange'])->name('admin#roleChange');
         });
 
+
         //user List
         Route::prefix('user')->group(function(){
             Route::get('list',[AdminController::class,'userList'])->name('admin#userList');
             Route::get('change/role',[AdminController::class,'changeUserRole'])->name('admin#changeUserRole');
             Route::get('delete/{id}',[AdminController::class,'deleteUser'])->name('admin#deleteUser');
         });
+
 
         //contact inbox message
         Route::prefix('contact')->group(function(){
@@ -104,9 +108,6 @@ Route::middleware(['auth'])->group(function () {
     //user
     //home
     Route::group(['prefix'=>'user','middleware'=>'user_auth'], function(){
-        // Route::get('home',function(){
-        //     return view('user.home');
-        // })->name('user#home');
 
         //user home page
         Route::get('/homePage',[UserController::class,'home'])->name('user#home');

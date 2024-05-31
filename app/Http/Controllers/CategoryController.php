@@ -12,7 +12,7 @@ class CategoryController extends Controller
     public function list(){
         $categories = Category::when(request('key'), function($query){
             $query->where('name','like','%'.request('key').'%');
-        })->orderBy('created_at','desc')->paginate(5);
+        })->orderBy('id','asc')->paginate(5);
         return view('admin.category.list', compact('categories'));
     }
 
@@ -53,21 +53,21 @@ class CategoryController extends Controller
         return redirect()->route('category#list')->with(['updateSuccess'=>'Category Updated ...']);
     }
 
-    //create category validation check
+    //create category validation check (Private)
     private function categoryValidationCheck($request){
         Validator::make($request->all(),[
             'categoryName'=>'required|unique:categories,name'
         ])->validate();
     }
 
-    //update category validation check
+    //update category validation check (Private)
     private function updateCategoryValidationCheck($request,$id){
         Validator::make($request->all(),[
             'categoryName'=>'required|unique:categories,name,'.$id
         ])->validate();
     }
 
-    //request category data
+    //request category data (Private)
     private function requestCategoryData($request){
         return [
             'name'=>$request->categoryName

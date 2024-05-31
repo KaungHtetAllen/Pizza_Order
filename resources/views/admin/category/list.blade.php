@@ -63,8 +63,6 @@
                 </div>
                 @endif
 
-
-
                 <div class="row">
                     <div class="col-3">
                         <h4 class="text-secondary">Search Key : <span class="text-danger">{{ request('key')}}</span></h4>
@@ -117,9 +115,6 @@
                                                 <i class="zmdi zmdi-delete"></i>
                                             </button>
                                         </a>
-                                        {{-- <button class="item" data-toggle="tooltip" data-placement="top" title="More">
-                                            <i class="zmdi zmdi-more"></i>
-                                        </button> --}}
                                     </div>
                                 </td>
                             </tr>

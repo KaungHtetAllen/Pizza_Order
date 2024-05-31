@@ -49,13 +49,6 @@
                                 </div>
                             </div>
                         </div>
-                        {{-- <div class="row mt-3">
-                            <div class="col-3 offset-2 text-center">
-                                <a href="{{ route('admin#edit')}}">
-                                    <button class="btn bg-dark text-white"><i class="fa-solid fa-pen-to-square mr-2"></i>Edit Profile</button>
-                                </a>
-                            </div>
-                        </div> --}}
                     </div>
                 </div>
             </div>

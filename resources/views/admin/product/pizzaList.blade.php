@@ -19,7 +19,7 @@
                     <div class="table-data__tool-right">
                         <a href="{{ route('product#createPage')}}">
                             <button class="au-btn au-btn-icon au-btn--green au-btn--small">
-                                <i class="zmdi zmdi-plus"></i>Add Pizza
+                                <i class="zmdi zmdi-plus"></i>Add Product
                             </button>
                         </a>
                         <button class="au-btn au-btn-icon au-btn--green au-btn--small">
@@ -62,8 +62,6 @@
                       </div>
                 </div>
                 @endif
-
-
 
                 <div class="row">
                     <div class="col-3">
@@ -126,9 +124,6 @@
                                                 <i class="zmdi zmdi-delete"></i>
                                             </button>
                                         </a>
-                                        {{-- <button class="item" data-toggle="tooltip" data-placement="top" title="More">
-                                            <i class="zmdi zmdi-more"></i>
-                                        </button> --}}
                                     </div>
                                 </td>
                             </tr>

@@ -33,7 +33,7 @@
 
 
     <!-- Navbar Start -->
-    <div class="container-fluid bg-dark mb-30">
+    <div class="container-fluid bg-dark mb-30 sticky-top">
         <div class="row px-xl-5">
             <div class="col-lg-3 d-none d-lg-block">
                 <div class="h1 text-uppercase text-warning bg-dark px-2 mt-2">CODE LAB</div>
@@ -48,38 +48,30 @@
                         <span class="navbar-toggler-icon"></span>
                     </button>
                     <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
-                        <div class="navbar-nav mr-auto py-0">
-                            <a href="{{ route('user#home')}}" class="nav-item nav-link active">Home</a>
+                        <div class="navbar-nav mr-auto py-0" >
+                            <a href="{{ route('user#home')}}" class="nav-item nav-link">Home</a>
                             <a href="{{ route('user#cartList')}}" class="nav-item nav-link">My Cart</a>
                             <a href="{{ route('user#contactForm')}}" class="nav-item nav-link">Contact</a>
                         </div>
                         <div class="navbar-nav ml-auto py-0 d-none d-lg-block">
-                            <a href="" class="btn px-0">
-                                <i class="fas fa-heart text-warning"></i>
-                                <span class="badge text-secondary border border-secondary rounded-circle" style="padding-bottom: 2px;">0</span>
-                            </a>
-                            <a href="" class="btn px-0 ml-3">
-                                <i class="fas fa-shopping-cart text-warning"></i>
-                                <span class="badge text-secondary border border-secondary rounded-circle" style="padding-bottom: 2px;">0</span>
-                            </a>
+                              <div class="dropdown col-3">
+                                <a class="btn btn-secondary px-3 dropdown-toggle text-capitalize" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                                  {{ Auth::user()->name }} <i class="fa-solid fa-angle-down ml-2"></i>
+                                </a>
 
-                            <div class="dropdown d-inline m-5">
-                                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <i class="fa-solid fa-user mr-1"></i>{{ Auth::user()->name}}
-                                </button>
-                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <a class="dropdown-item py-1 my-2" href="{{ route('account#profile')}}"><i class="fa-solid fa-user mr-2"></i>Account</a>
-                                    <a class="dropdown-item py-1 my-2" href="{{ route('account#changePasswordPage')}}"><i class="fa-solid fa-key mr-2"></i>Change Password</a>
-                                    <span class="dropdown-item" href="#">
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                  <li><a class="dropdown-item py-3" href="{{ route('account#profile')}}"><i class="fa-solid fa-user mr-2"></i>Account</a></li>
+                                  <li><a class="dropdown-item py-3" href="{{ route('account#changePasswordPage')}}"><i class="fa-solid fa-key mr-2"></i>Change Password</a></li>
+                                  <li>
+                                    <div class="dropdown-item my-2 text-center" href="#">
                                         <form action="{{ route('logout')}}" method="POST" class="d-inline">
                                             @csrf
                                             <button class="btn bg-dark text-white rounded" type="submit">Log Out <i class="fa-solid fa-right-from-bracket ml-2"></i></button>
                                         </form>
-                                    </span>
-                                </div>
+                                    </div>
+                                  </li>
+                                </ul>
                               </div>
-
-
                         </div>
                     </div>
                 </nav>
